@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="10.0.0" />
@@ -20,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Desafio.Entrada.Saida.Dominio\Desafio.Entrada.Saida.Dominio.csproj" />
     <ProjectReference Include="..\Desafio.Entrada.Saida.Infraestrutura\Desafio.Entrada.Saida.Infraestrutura.csproj" />
+    <ProjectReference Include="..\Desafio.Entrada.Saida.Queue\Desafio.Entrada.Saida.Queue.csproj" />
     <ProjectReference Include="..\Desafio.Entrada.Saida.Servico\Desafio.Entrada.Saida.Servico.csproj" />
   </ItemGroup>
 

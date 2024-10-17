@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.Entrada.Saida.Infra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.Entrada.Saida.Servico", "..\Desafio.Entrada.Saida.Servico\Desafio.Entrada.Saida.Servico.csproj", "{1B5AC505-4A4A-4ED5-9158-EDB4012670C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desafio.Entrada.Saida.Queue", "..\Desafio.Entrada.Saida.Queue\Desafio.Entrada.Saida.Queue.csproj", "{9E8F5F3D-2A57-4DA4-A7A9-63702313F833}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1B5AC505-4A4A-4ED5-9158-EDB4012670C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B5AC505-4A4A-4ED5-9158-EDB4012670C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B5AC505-4A4A-4ED5-9158-EDB4012670C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E8F5F3D-2A57-4DA4-A7A9-63702313F833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E8F5F3D-2A57-4DA4-A7A9-63702313F833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E8F5F3D-2A57-4DA4-A7A9-63702313F833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E8F5F3D-2A57-4DA4-A7A9-63702313F833}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

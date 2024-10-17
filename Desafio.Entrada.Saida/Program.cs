@@ -5,6 +5,8 @@ using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using System;
 using Desafio.entrada.saida.Dominio;
+using Desafio.Entrada.Saida.Queue;
+using Desafio.Entrada.Saida.Queue.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,8 @@ builder.Services.AddSwaggerGen();
 // Registrar serviços e repositórios
 builder.Services.AddScoped<IEmbalagemService, EmbalagemService>();
 builder.Services.AddScoped<IRepositorioCaixa, RepositorioCaixa>();
+builder.Services.AddScoped<IQueueService, QueueService>();
+builder.Services.AddScoped<IQueueConsumer, QueueConsumer>();
 
 var app = builder.Build();
 

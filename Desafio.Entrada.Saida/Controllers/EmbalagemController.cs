@@ -1,6 +1,11 @@
 ﻿using Desafio.entrada.saida.Dominio.DTO;
 using Desafio.entrada.saida.Dominio;
+using Desafio.Entrada.Saida.Dominio;
 using Desafio.Entrada.Saida.Dominio.DTO.Request;
+using Desafio.Entrada.Saida.Dominio.DTO.Requests;
+using Desafio.Entrada.Saida.Dominio.DTO.Response;
+using Desafio.Entrada.Saida.Queue;
+using Desafio.Entrada.Saida.Queue.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -11,23 +16,16 @@ namespace Desafio.Entrada.Saida.Api.Controllers
     public class EmbalagemController : ControllerBase
     {
         private readonly IEmbalagemService _embalagemService;
+        private readonly IQueueService _queueService;
         private readonly Serilog.ILogger _logger;
 
-        /// <summary>
-        /// Inicializa uma nova instância do controller de embalagem.
-        /// </summary>
-        /// <param name="embalagemService">O serviço de embalagem injetado.</param>
-        public EmbalagemController(IEmbalagemService embalagemService)
+        public EmbalagemController(IEmbalagemService embalagemService, IQueueService queueService)
         {
             _embalagemService = embalagemService;
+            _queueService = queueService;
             _logger = Log.ForContext<EmbalagemController>();
         }
 
-        /// <summary>
-        /// Processa uma lista de pedidos e retorna a solução de embalagem.
-        /// </summary>
-        /// <param name="pedidos">A lista de pedidos em formato JSON.</param>
-        /// <returns>O resultado do processamento de embalagem.</returns>
         [HttpPost("processar-pedidos")]
         public ActionResult<EmbalagemResultadoResponse> ProcessarPedidos([FromBody] List<PedidoRequest> pedidos)
         {
@@ -41,7 +39,6 @@ namespace Desafio.Entrada.Saida.Api.Controllers
 
             try
             {
-                // Converte a lista de pedidos para JSON para utilizar o método do serviço
                 var pedidosJson = System.Text.Json.JsonSerializer.Serialize(pedidos);
                 var resultado = _embalagemService.ProcessarPedidos(pedidosJson);
 
@@ -50,6 +47,9 @@ namespace Desafio.Entrada.Saida.Api.Controllers
                     _logger.Error("Erro ao processar os pedidos: {Mensagem}", resultado.Mensagem);
                     return BadRequest(resultado.Mensagem);
                 }
+
+                // Publica uma mensagem no RabbitMQ
+                _queueService.Publish("processamento_pedidos", pedidosJson);
 
                 _logger.Information("Pedidos processados com sucesso.");
                 return Ok(resultado);
